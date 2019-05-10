@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaunicom.sirbee.dao.mapper.TDictMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaunicom.sirbee.dao.model.TDict" >
+    <id column="dict_id" property="dictId" jdbcType="BIGINT" />
+    <result column="key" property="key" jdbcType="BIGINT" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dict_id, key, value, field_name, table_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dict
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_dict
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.chinaunicom.sirbee.dao.model.TDict" >
+    insert into t_dict (dict_id, key, value, 
+      field_name, table_name)
+    values (#{dictId,jdbcType=BIGINT}, #{key,jdbcType=BIGINT}, #{value,jdbcType=VARCHAR}, 
+      #{fieldName,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaunicom.sirbee.dao.model.TDict" >
+    insert into t_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        dict_id,
+      </if>
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictId != null" >
+        #{dictId,jdbcType=BIGINT},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=BIGINT},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaunicom.sirbee.dao.model.TDict" >
+    update t_dict
+    <set >
+      <if test="key != null" >
+        key = #{key,jdbcType=BIGINT},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaunicom.sirbee.dao.model.TDict" >
+    update t_dict
+    set key = #{key,jdbcType=BIGINT},
+      value = #{value,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR}
+    where dict_id = #{dictId,jdbcType=BIGINT}
+  </update>
+
+
+
+  <!--listDict-->
+  <select id="listDict" resultMap="BaseResultMap">
+    select
+    td.*
+    from t_dict td
+    where 1=1
+    <if test="fieldName != null">
+      and td.field_name=#{fieldName,jdbcType=VARCHAR}
+    </if>
+    <if test="tableName != null">
+      and td.table_name=#{tableName,jdbcType=VARCHAR}
+    </if>
+    <if test="sortName != null and sortType==0">
+      order by ${sortName} desc
+    </if>
+    <if test="sortName != null and sortType==1">
+      order by ${sortName} asc
+    </if>
+
+
+  </select>
+
+
+</mapper>

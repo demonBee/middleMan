@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaunicom.sirbee.dao.mapper.TPayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaunicom.sirbee.dao.model.TPayInfo" >
+    <id column="pay_info_id" property="payInfoId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="pay_info_number" property="payInfoNumber" jdbcType="INTEGER" />
+    <result column="pay_number" property="payNumber" jdbcType="VARCHAR" />
+    <result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
+    <result column="pay_user_id" property="payUserId" jdbcType="VARCHAR" />
+    <result column="receive_account" property="receiveAccount" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="readed" property="readed" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pay_info_id, order_id, pay_info_number, pay_number, pay_account, pay_user_id, receive_account, 
+    comment, create_time,readed
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay_info
+    where pay_info_id = #{payInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_pay_info
+    where pay_info_id = #{payInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chinaunicom.sirbee.dao.model.TPayInfo" >
+    insert into t_pay_info (pay_info_id, order_id, pay_info_number, 
+      pay_number, pay_account, pay_user_id, 
+      receive_account, comment, create_time,readed
+      )
+    values (#{payInfoId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{payInfoNumber,jdbcType=INTEGER}, 
+      #{payNumber,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR}, #{payUserId,jdbcType=VARCHAR}, 
+      #{receiveAccount,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},#{readed,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaunicom.sirbee.dao.model.TPayInfo" >
+    insert into t_pay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payInfoId != null" >
+        pay_info_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="payInfoNumber != null" >
+        pay_info_number,
+      </if>
+      <if test="payNumber != null" >
+        pay_number,
+      </if>
+      <if test="payAccount != null" >
+        pay_account,
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id,
+      </if>
+      <if test="receiveAccount != null" >
+        receive_account,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="readed != null">
+        readed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payInfoId != null" >
+        #{payInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="payInfoNumber != null" >
+        #{payInfoNumber,jdbcType=INTEGER},
+      </if>
+      <if test="payNumber != null" >
+        #{payNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null" >
+        #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserId != null" >
+        #{payUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAccount != null" >
+        #{receiveAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readed != null">
+        #{readed,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaunicom.sirbee.dao.model.TPayInfo" >
+    update t_pay_info
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="payInfoNumber != null" >
+        pay_info_number = #{payInfoNumber,jdbcType=INTEGER},
+      </if>
+      <if test="payNumber != null" >
+        pay_number = #{payNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null" >
+        pay_account = #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id = #{payUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAccount != null" >
+        receive_account = #{receiveAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readed != null">
+        readed=#{readed,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pay_info_id = #{payInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaunicom.sirbee.dao.model.TPayInfo" >
+    update t_pay_info
+    set order_id = #{orderId,jdbcType=INTEGER},
+      pay_info_number = #{payInfoNumber,jdbcType=INTEGER},
+      pay_number = #{payNumber,jdbcType=VARCHAR},
+      pay_account = #{payAccount,jdbcType=VARCHAR},
+      pay_user_id = #{payUserId,jdbcType=VARCHAR},
+      receive_account = #{receiveAccount,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      readed=#{readed,jdbcType=INTEGER}
+    where pay_info_id = #{payInfoId,jdbcType=INTEGER}
+  </update>
+
+
+
+  <!--listPay-->
+  <select id="listPay" resultMap="BaseResultMap">
+    select
+    tp.*
+    from t_pay_info tp
+    where 1=1
+    <if test="payInfoId != null">
+      and tp.pay_info_id like concat('%',#{payInfoId,jdbcType=INTEGER}  ,'%')
+    </if>
+    <if test="orderId != null">
+      and tp.order_id like concat('%',#{orderId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="orderIds != null and orderIds.size() != 0">
+      and tp.order_id in
+      <foreach collection="orderIds" item="item" index="index" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="sortName != null and sortType==0">
+      order by ${sortName} desc
+    </if>
+    <if test="sortName != null and sortType==1">
+      order by ${sortName} asc
+    </if>
+
+  </select>
+
+
+</mapper>

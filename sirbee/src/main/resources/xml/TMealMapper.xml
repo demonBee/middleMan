@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaunicom.sirbee.dao.mapper.TMealMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaunicom.sirbee.dao.model.TMeal" >
+    <id column="mid" property="mid" jdbcType="CHAR" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_price" property="mPrice" jdbcType="INTEGER" />
+    <result column="m_detail" property="mDetail" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="imgs" property="imgs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mid, m_name, m_price, m_detail, status, create_time, modify_time, imgs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_meal
+    where mid = #{mid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_meal
+    where mid = #{mid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.chinaunicom.sirbee.dao.model.TMeal" >
+    insert into t_meal (mid, m_name, m_price, 
+      m_detail, status, create_time, 
+      modify_time, imgs)
+    values (#{mid,jdbcType=CHAR}, #{mName,jdbcType=VARCHAR}, #{mPrice,jdbcType=INTEGER}, 
+      #{mDetail,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{imgs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaunicom.sirbee.dao.model.TMeal" >
+    insert into t_meal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mPrice != null" >
+        m_price,
+      </if>
+      <if test="mDetail != null" >
+        m_detail,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="imgs != null" >
+        imgs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=CHAR},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPrice != null" >
+        #{mPrice,jdbcType=INTEGER},
+      </if>
+      <if test="mDetail != null" >
+        #{mDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgs != null" >
+        #{imgs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaunicom.sirbee.dao.model.TMeal" >
+    update t_meal
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPrice != null" >
+        m_price = #{mPrice,jdbcType=INTEGER},
+      </if>
+      <if test="mDetail != null" >
+        m_detail = #{mDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgs != null" >
+        imgs = #{imgs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaunicom.sirbee.dao.model.TMeal" >
+    update t_meal
+    set m_name = #{mName,jdbcType=VARCHAR},
+      m_price = #{mPrice,jdbcType=INTEGER},
+      m_detail = #{mDetail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      imgs = #{imgs,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=CHAR}
+  </update>
+
+
+  <!--listMeal-->
+  <select id="listMeal" resultMap="BaseResultMap">
+    select
+    tm.*
+    from t_meal tm
+    where 1=1
+    <if test="mid != null">
+     and tm.mid like concat('%',#{mid,jdbcType=VARCHAR} ,'%')
+    </if>
+    <if test="status != null">
+     and tm.status=#{status,jdbcType=VARCHAR}
+    </if>
+    <if test="sortName != null and sortType==0">
+      order by ${sortName} desc
+    </if>
+    <if test="sortName != null and sortType==1">
+      order by ${sortName} asc
+    </if>
+
+  </select>
+
+</mapper>

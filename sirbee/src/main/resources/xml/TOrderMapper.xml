@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaunicom.sirbee.dao.mapper.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaunicom.sirbee.dao.model.TOrder" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="apply_id" property="applyId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="set_meal" property="setMeal" jdbcType="CHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="e_mail" property="eMail" jdbcType="VARCHAR" />
+    <result column="portrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="totail_price" property="totailPrice" jdbcType="INTEGER" />
+    <result column="price_detail" property="priceDetail" jdbcType="VARCHAR" />
+    <result column="deal_manager" property="dealManager" jdbcType="VARCHAR" />
+    <result column="deal_men" property="dealMen" jdbcType="VARCHAR" />
+
+    <association property="tMeal" javaType="com.chinaunicom.sirbee.dao.model.TMeal">
+      <id column="mid" property="mid" jdbcType="CHAR" />
+      <result column="m_name" property="mName" jdbcType="VARCHAR" />
+      <result column="m_price" property="mPrice" jdbcType="INTEGER" />
+      <result column="m_detail" property="mDetail" jdbcType="VARCHAR" />
+      <result column="status" property="status" jdbcType="CHAR" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+      <result column="imgs" property="imgs" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, apply_id, user_id, type, address, description, set_meal, user_name, sex, 
+    e_mail, portrait, wechat, create_time, modify_time, totail_price, price_detail,deal_manager,deal_men
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chinaunicom.sirbee.dao.model.TOrder" >
+    insert into t_order (order_id, apply_id, user_id, 
+      type, address, description, 
+      set_meal, user_name, sex, e_mail, 
+      portrait, wechat, create_time, 
+      modify_time, totail_price, price_detail,deal_manager,deal_men
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{applyId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{setMeal,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{portrait,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{totailPrice,jdbcType=INTEGER}, #{priceDetail,jdbcType=VARCHAR},
+      #{dealManager,jdbcType=VARCHAR},#{dealMen,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaunicom.sirbee.dao.model.TOrder" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="setMeal != null" >
+        set_meal,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="eMail != null" >
+        e_mail,
+      </if>
+      <if test="portrait != null" >
+        portrait,
+      </if>
+      <if test="wechat != null" >
+        wechat,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="totailPrice != null" >
+        totail_price,
+      </if>
+      <if test="priceDetail != null" >
+        price_detail,
+      </if>
+      <if test="dealManager != null">
+        deal_manager,
+      </if>
+      <if test="dealMen != null">
+        deal_men,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="applyId != null" >
+        #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="setMeal != null" >
+        #{setMeal,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totailPrice != null" >
+        #{totailPrice,jdbcType=INTEGER},
+      </if>
+      <if test="priceDetail != null" >
+        #{priceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="dealManager != null">
+        #{dealManager,jdbcType=VARCHAR},
+      </if>
+      <if test="dealMen != null">
+        #{dealMen,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaunicom.sirbee.dao.model.TOrder" >
+    update t_order
+    <set >
+      <if test="applyId != null" >
+        apply_id = #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="setMeal != null" >
+        set_meal = #{setMeal,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totailPrice != null" >
+        totail_price = #{totailPrice,jdbcType=INTEGER},
+      </if>
+      <if test="priceDetail != null" >
+        price_detail = #{priceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="dealManager != null">
+        deal_manager=#{dealManager,jdbcType=VARCHAR},
+      </if>
+      <if test="dealMen != null">
+        deal_men=#{dealMen,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaunicom.sirbee.dao.model.TOrder" >
+    update t_order
+    set apply_id = #{applyId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      set_meal = #{setMeal,jdbcType=CHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      totail_price = #{totailPrice,jdbcType=INTEGER},
+      price_detail = #{priceDetail,jdbcType=VARCHAR},
+      deal_manager= #{dealManager,jdbcType=VARCHAR},
+      deal_men=#{dealMen,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+  <!--listOrder-->
+  <select id="listOrder" resultMap="BaseResultMap">
+    select
+    too.*,
+    tm.mid,tm.m_name,tm.m_price,tm.m_detail,tm.imgs,tm.status
+    from t_order too
+    left join  t_meal tm on tm.mid=too.set_meal
+    where 1=1
+    <if test="type != null">
+     and too.type=#{type,jdbcType=VARCHAR}
+    </if>
+    <if test="orderId != null">
+     and too.order_id like concat('%',#{orderId,jdbcType=VARCHAR} ,'%')
+    </if>
+    <if test="sortName != null and sortType==0">
+      order by ${sortName} desc
+    </if>
+    <if test="sortName != null and sortType==1">
+      order by ${sortName} asc
+    </if>
+  </select>
+
+</mapper>

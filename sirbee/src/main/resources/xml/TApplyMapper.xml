@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaunicom.sirbee.dao.mapper.TApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaunicom.sirbee.dao.model.TApply" >
+    <id column="apply_id" property="applyId" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="e_mail" property="eMail" jdbcType="VARCHAR" />
+    <result column="portrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="set_meal" property="setMeal" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    apply_id, mobile, username, sex, e_mail, portrait, wechat, type, set_meal, address,
+    create_time, comment, message,follow_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_apply
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_apply
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chinaunicom.sirbee.dao.model.TApply" >
+    insert into t_apply (apply_id, mobile, username,
+      sex, e_mail, portrait, 
+      wechat, type, set_meal, address, 
+      create_time, comment, message,follow_time
+      )
+    values (#{applyId,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{eMail,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, 
+      #{wechat,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{setMeal,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR},#{followTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaunicom.sirbee.dao.model.TApply" >
+    insert into t_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="eMail != null" >
+        e_mail,
+      </if>
+      <if test="portrait != null" >
+        portrait,
+      </if>
+      <if test="wechat != null" >
+        wechat,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="setMeal != null" >
+        set_meal,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="followTime != null">
+        follow_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="setMeal != null" >
+        #{setMeal,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null">
+       #{followTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaunicom.sirbee.dao.model.TApply" >
+    update t_apply
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="setMeal != null" >
+        set_meal = #{setMeal,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null">
+        follow_time=#{followTime,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaunicom.sirbee.dao.model.TApply" >
+    update t_apply
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      set_meal = #{setMeal,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      follow_time=#{followTime,jdbcType=TIMESTAMP}
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <select id="listApply" resultMap="BaseResultMap">
+    select
+    ta.*
+    from t_apply ta
+    where 1=1
+    <if test="applyType != null">
+      and ta.type=#{applyType,jdbcType=VARCHAR}
+    </if>
+    <if test="searchName != null">
+      and  ta.mobile like concat('%',#{searchName,jdbcType=VARCHAR} ,'%')
+    </if>
+    <if test="sortName != null and sortType!=null and sortType==0 ">
+      order by ${sortName} desc
+    </if>
+    <if test="sortName != null and sortType!=null and sortType==1">
+      order by ${sortName} asc
+    </if>
+  </select>
+
+</mapper>
